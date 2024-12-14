@@ -4,7 +4,7 @@ from django.conf import settings
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Watchman.settings")
 
-app = Celery("Watchman")
+app = Celery("strwatch")
 app.conf.timezone = "UTC"
 app.config_from_object("django.conf:settings", namespace="CELERY")
 app.conf.update(

@@ -5,6 +5,7 @@ from logging.config import dictConfig
 
 
 BASE_URL = "http://localhost:8000"
+DATA_URL = "https://data.nola.gov/api/views/en36-xvxg/rows.csv"
 
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379/0"
@@ -22,6 +23,8 @@ DBPASSWORD = os.getenv("DBPASSWORD") or warn(
 DBHOST = os.getenv("DBHOST") or warn(
     "No Database Host set in environment variable DBHOST"
 )
+
+REQUESTS_TIMEOUT = os.getenv("REQUESTS_TIMEOUT") or 10
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
