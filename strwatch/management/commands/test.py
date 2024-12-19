@@ -41,16 +41,17 @@ class Command(BaseCommand):
                 issue_date = row[16]
                 reference_code = row[17]
 
-                #print(f"{reference_code}")
-                STRrecord.objects.create(
+                #fixme orderby created
+                existing = STRrecord.objects.filter(reference_code=reference_code).first()
+                line_record = STRrecord(
                     permit_number=permit_number,
                     address=address,
                     permit_type=permit_type,
                     residential_subtype=residential_subtype,
                     expired=expired,
                     #expiration_date=expiration_date,
-                    #bedroom_limit=bedroom_limit,
-                    #guest_limit=guest_limit,
+                    bedroom_limit=bedroom_limit,
+                    guest_limit=guest_limit,
                     link=link,
                     operator_name=operator_name,
                     operator_phone=operator_phone,
@@ -58,8 +59,11 @@ class Command(BaseCommand):
                     license_holder_name=license_holder_name,
                     #application_date=application_date,
                     #issue_date=issue_date,
-                    reference_code=reference_code
+                    reference_code=reference_code,
                 )
+                if line_record != existing:
+                    print(f"new record!!! {reference_code}")
+                    line_record.save()
 
             except Exception as e:
                 logger.error(e)

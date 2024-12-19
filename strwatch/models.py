@@ -5,22 +5,9 @@ from django.utils import timezone
 from django.db import models
 
 
-# class DataSource(models.Model):
-#     url = models.CharField(max_length=255, blank=True, null=True)
-#     update_interval = models.IntegerField(blank=False, null=False)
-#     api_key = models.CharField(max_length=255, blank=True, null=True)
-#     is_active = models.BooleanField(default=False, db_index=True)
-#     created = models.DateTimeField(auto_now_add=True, blank=True)
-#     last_modified = models.DateTimeField(auto_now=True, blank=True)
-#     last_updated = models.DateTimeField(blank=True, null=True, default=timezone.now() - timedelta(days=365))
-#     last_completed = models.DateTimeField(blank=True, null=True, default=timezone.now() - timedelta(days=365))
-#     last_error = models.DateTimeField(blank=True, null=True, default=timezone.now() - timedelta(days=365))
-#     error_message = models.TextField(blank=True, null=True)
-#     status = models.CharField(max_length=32, default="unknown", blank=True, null=True, db_index=True)
-#
-
 
 class STRrecord(models.Model):
+    id = models.AutoField(primary_key=True)
     permit_number = models.CharField(blank=True, null=True)
     address = models.CharField(blank=True, null=True)
     permit_type = models.CharField(blank=True, null=True)
@@ -29,8 +16,8 @@ class STRrecord(models.Model):
     #expired = models.BooleanField(default=False, blank=True, null=True)
     expired = models.CharField(blank=True, null=True)
     expiration_date = models.DateTimeField(blank=True, null=True)
-    bedroom_limit = models.IntegerField(blank=True, null=True)
-    guest_limit = models.IntegerField(blank=True, null=True)
+    bedroom_limit = models.CharField(blank=True, null=True)
+    guest_limit = models.CharField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     operator_name = models.CharField(blank=True, null=True)
     operator_phone = models.CharField(blank=True, null=True)
@@ -39,7 +26,7 @@ class STRrecord(models.Model):
     license_holder_name = models.CharField(blank=True, null=True)
     application_date = models.DateTimeField(blank=True, null=True)
     issue_date = models.DateTimeField(blank=True, null=True)
-    reference_code = models.CharField(blank=True, null=True)
+    reference_code = models.CharField(null=False, blank=False)
     created = models.DateTimeField(auto_now_add=True, blank=True)
 
 
