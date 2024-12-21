@@ -14,10 +14,7 @@ def marta():
     res.raise_for_status()
     for line in res.text.splitlines():
         if search(NAME, line, flags=IGNORECASE):
-            if sha256(line.encode()).hexdigest() == KNOWN_HASH:
-                print("No Change")
-            else:
-                print(f"CHANGE: {line}")
+            if sha256(line.encode()).hexdigest() != KNOWN_HASH: print(f"CHANGE: {line}")
 
 
 if __name__ == '__main__':
